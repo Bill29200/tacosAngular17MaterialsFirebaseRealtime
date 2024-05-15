@@ -1,0 +1,15 @@
+.align-center {
+  flex: 1; /* Cela fait en sorte que le texte occupe l'espace disponible */
+  text-align: center; /* Aligne le texte au centre horizontalement */
+
+  display: flex;
+  justify-content: center; /* Alignement horizontal au centre */
+  align-items: center; /* Alignement vertical au centre */
+  height: 100%; /* Assure que la div remplit toute la hauteur de la barre d'outils */
+
+  color: chocolate;
+}
+mat-icon{
+  color:rgb(243, 115, 3);
+}
+

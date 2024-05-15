@@ -1,1 +1,22 @@
-<p>menu works!</p>
+<mat-toolbar class="title">
+  <span></span>
+  <span class="align-center">TACOS
+     <img mat-card-sm-image alt="TACOS" src="assets/tacos.png" />
+  </span>
+  <span></span>
+
+</mat-toolbar>
+<br>
+<mat-toolbar color="primary">
+  <button mat-icon-button>
+    <mat-icon color="accent"> fastfood</mat-icon>
+  </button>
+  <span style="flex:auto"></span>
+  <button mat-button routerLink="/home" routerLinkActive="active">Home</button>
+  <button mat-button routerLink="/admin" routerLinkActive="active">Admin</button>
+  <button mat-button routerLink="/server" routerLinkActive="active">Server</button>
+  <button mat-button routerLink="/client" routerLinkActive="active">Client</button>
+  <button mat-button routerLink="/about" routerLinkActive="active">About</button>
+  <button mat-raised-button>Logout</button>
+
+</mat-toolbar>
