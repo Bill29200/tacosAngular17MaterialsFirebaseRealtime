@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -14,6 +16,7 @@ import { AboutComponent } from './components/about/about.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ClientComponent } from './components/client/client.component';
 import { HomeComponent } from './components/home/home.component';
+import { loginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ServerComponent } from './components/server/server.component';
 
@@ -26,6 +29,7 @@ import { ServerComponent } from './components/server/server.component';
     HomeComponent,
     MenuComponent,
     AboutComponent,
+    loginComponent
 
   ],
   imports: [
@@ -36,6 +40,8 @@ import { ServerComponent } from './components/server/server.component';
     MatMenuModule,
     MatIconModule,
     MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
 
     RouterLink,
     RouterLinkActive,
