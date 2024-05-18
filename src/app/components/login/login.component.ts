@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit{
 
 
   public loginForm! : FormGroup;
-
+   public authentication = true;
   //-------------------------------------------------
   constructor(private fb : FormBuilder, private authService : AuthService, private router : Router){}
   //-------------------------------------------------
@@ -31,13 +31,17 @@ login() {
  console.log("AUTH = ",auth)
  if(auth==true)
   {
-
+    this.authentication = true;
      this.router.navigateByUrl("/menu");
 
   }
   else
   {
-
+    this.authentication = false;
+    this.loginForm = this.fb.group({
+      username : "",
+      password : ""
+    });
   }
 
 

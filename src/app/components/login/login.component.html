@@ -20,9 +20,12 @@
 
     <mat-card-actions align="end">
       <button mat-button mat-raised-button color="primary" (click)="login()">Login</button>
-
     </mat-card-actions>
+
+      <h3 *ngIf = "authentication==false"><mat-icon>error</mat-icon> Incorrect password or username</h3>
+
   </mat-card>
+
 </div>
 <router-outlet />
 
