@@ -17,7 +17,10 @@
   <button mat-button routerLink="/menu/server" routerLinkActive="active">Server</button>
   <button mat-button routerLink="/menu/client" routerLinkActive="active">Client</button>
   <button mat-button routerLink="/menu/about" routerLinkActive="active">About</button>
-  <button mat-raised-button>Logout</button>
+  <button mat-button *ngIf = "authService.isAuthenticated" color="accent">
+    {{authService.username}}
+  </button>
+  <button mat-raised-button color ="accent" (click)="logout()">Logout</button>
 
 </mat-toolbar>
 <router-outlet></router-outlet>
