@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,13 +13,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { AboutComponent } from './components/about/about.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ClientComponent } from './components/client/client.component';
 import { HomeComponent } from './components/home/home.component';
-import { loginComponent } from './components/login/login.component';
+
 import { MenuComponent } from './components/menu/menu.component';
 import { ServerComponent } from './components/server/server.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,7 @@ import { ServerComponent } from './components/server/server.component';
     HomeComponent,
     MenuComponent,
     AboutComponent,
-    loginComponent
+    LoginComponent
 
   ],
   imports: [
@@ -45,7 +48,9 @@ import { ServerComponent } from './components/server/server.component';
 
     RouterLink,
     RouterLinkActive,
-    RouterOutlet
+    RouterOutlet,
+    ReactiveFormsModule
+
   ],
   providers: [
     provideAnimationsAsync()
