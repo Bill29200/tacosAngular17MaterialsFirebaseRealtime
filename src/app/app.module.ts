@@ -19,9 +19,11 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ClientComponent } from './components/client/client.component';
 import { HomeComponent } from './components/home/home.component';
 
+import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ServerComponent } from './components/server/server.component';
-import { LoginComponent } from './components/login/login.component';
+import { AuthGard } from './guards/auth.guard';
+import { AuthorizationGard } from './guards/authorization.guard';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { LoginComponent } from './components/login/login.component';
 
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    AuthGard,
+    AuthorizationGard
   ],
   bootstrap: [AppComponent]
 })

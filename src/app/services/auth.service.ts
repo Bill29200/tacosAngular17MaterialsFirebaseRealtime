@@ -7,7 +7,7 @@ export class AuthService {
 
 //----------------------------------------------------------------
   public users :any ={
-   admin:{password:'1234', roles:['ADMIN','SERVER','CLIENT']},
+   admin:{password:'1234', roles:['ADMIN','SERVER']},
    server:{password:'1234', roles:['SERVER']},
    client:{password:'1234', roles:['CLIENT']}
   }

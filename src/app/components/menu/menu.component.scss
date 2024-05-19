@@ -7,10 +7,10 @@
   align-items: center; /* Alignement vertical au centre */
   height: 100%; /* Assure que la div remplit toute la hauteur de la barre d'outils */
 
-  color: chocolate;
+  color: rgb(238, 103, 6);
 }
 mat-icon{
-  color:rgb(243, 115, 3);
+  color: rgb(238, 103, 6);
 }
 
 img {
@@ -19,3 +19,14 @@ img {
   width:100px;
 
 }
+.barMenu{
+  background-color: rgb(9, 159, 9);
+  color: antiquewhite;
+}
+button{
+  color: rgb(238, 103, 6);
+}
+.espace {
+  margin-left: 50px;
+}
+
