@@ -1,12 +1,15 @@
 
-import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
+
+
 
 //************************************************* */
-export interface PeriodicElement {
-  name: string;
-  position: number;
-}
+
 //********************************** */
 
 @Component({
@@ -14,39 +17,56 @@ export interface PeriodicElement {
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
-export class AdminComponent implements OnInit{
+export class AdminComponent implements OnInit {
 
+filterChange(arg0: any) {
+throw new Error('Method not implemented.');
+}
+  @ViewChild(MatSort) sort!: MatSort ;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  dataSource!: MatTableDataSource<Family>;
   displayedColumns: string[] = ['id', 'nom'];
+  filter: string = '';
+  length: number = 0;
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [3,5, 10, 25, 50];
 
-  ELEMENT_DATA!: any[] ;
-  familyKeys!: never[];
-  dataSource = this.ELEMENT_DATA;
+  private familyRef!: AngularFireList<Family>;
 
-  resultsLength = 0;
-  //********************************* */
   constructor(private db: AngularFireDatabase) {
-    this.fetchData();
-   }
+    this.familyRef = this.db.list('family');
+  }
 
-  fetchData() {
-    this.db.database.ref('family').once('value', (snapshot) => { // Get data once
-      this.ELEMENT_DATA = []; // Clear previous data
-      this.familyKeys = [];
-
-      for (const key in snapshot.val()) { // Iterate through each object in the table
-        this.ELEMENT_DATA.push(snapshot.val()[key]); // Add object to data array
-       // this.familyKeys.push(key); // Add key to keys array
-      }
+  ngOnInit(): void {
+    this.familyRef.snapshotChanges().subscribe((changes: any[]) => {
+      this.dataSource = new MatTableDataSource(this.getFamilies(changes));
+      this.length = this.dataSource.data.length;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
   }
-  //-------------------------------------------------
-  ngOnInit() {
-    this.fetchData();
 
-
+  private getFamilies(changes: any[]): Family[] {
+    const families: Family[] = [];
+    changes.forEach(change => {
+      const key = change.key;
+      const data = change.payload.val();
+      families.push({ id: data.id, nom: data.nom });
+    });
+    return families;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  //-------------------------------------------------
+}
+
+interface Family {
+  id: string;
+  nom: string;
+}
+
 
 
