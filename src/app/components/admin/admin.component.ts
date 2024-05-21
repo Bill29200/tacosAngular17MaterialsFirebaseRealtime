@@ -4,24 +4,15 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/datab
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-
-
-
-//************************************************* */
-
-//********************************** */
-
+//------------------------------------------------------------------------
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
-export class AdminComponent implements OnInit {
 
-filterChange(arg0: any) {
-throw new Error('Method not implemented.');
-}
+export class AdminComponent implements OnInit {
+//------------------------------------------------------------------------
   @ViewChild(MatSort) sort!: MatSort ;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -33,11 +24,11 @@ throw new Error('Method not implemented.');
   pageSizeOptions: number[] = [3,5, 10, 25, 50];
 
   private familyRef!: AngularFireList<Family>;
-
+//------------------------------------------------------------------------
   constructor(private db: AngularFireDatabase) {
     this.familyRef = this.db.list('family');
   }
-
+//------------------------------------------------------------------------
   ngOnInit(): void {
     this.familyRef.snapshotChanges().subscribe((changes: any[]) => {
       this.dataSource = new MatTableDataSource(this.getFamilies(changes));
@@ -46,7 +37,7 @@ throw new Error('Method not implemented.');
       this.dataSource.paginator = this.paginator;
     });
   }
-
+//------------------------------------------------------------------------
   private getFamilies(changes: any[]): Family[] {
     const families: Family[] = [];
     changes.forEach(change => {
@@ -56,13 +47,13 @@ throw new Error('Method not implemented.');
     });
     return families;
   }
-
+//------------------------------------------------------------------------
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
-
+//------------------------------------------------------------------------
 interface Family {
   id: string;
   nom: string;

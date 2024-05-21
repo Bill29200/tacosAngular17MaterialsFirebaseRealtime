@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -63,6 +64,8 @@ import { AuthorizationGard } from './guards/authorization.guard';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSortModule,
+    MatTableModule,
 
     RouterLink,
     RouterLinkActive,
