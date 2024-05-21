@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit{
 
+  hide = true ;
 
   public loginForm! : FormGroup;
    public authentication = true;
