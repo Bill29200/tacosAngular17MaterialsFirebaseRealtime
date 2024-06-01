@@ -60,9 +60,7 @@ throw new Error('Method not implemented.');
   }
 
   ajoutProduit(){
-    let nomProduit = this.produitForm.value.nomProduit;
-    let prix = this.produitForm.value.prix;
-    alert(nomProduit +" avec le prix "+prix +"  euros est ajouté");
+
   }
 
 
