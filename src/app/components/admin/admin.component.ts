@@ -1,9 +1,9 @@
 
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 //------------------------------------------------------------------------
 @Component({
   selector: 'app-admin',
@@ -12,52 +12,64 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 
 export class AdminComponent implements OnInit {
+[x: string]: any;
+addProduit() {
+throw new Error('Method not implemented.');
+}
 //------------------------------------------------------------------------
   @ViewChild(MatSort) sort!: MatSort ;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  dataSource!: MatTableDataSource<Family>;
-  displayedColumns: string[] = ['id', 'nom'];
-  filter: string = '';
-  length: number = 0;
-  pageSize: number = 10;
-  pageSizeOptions: number[] = [3,5, 10, 25, 50];
+  lesFamilles : string[]=[];
 
-  private familyRef!: AngularFireList<Family>;
+  tableau: any[] = [];
+
+ url='https://tacosit-0-default-rtdb.europe-west1.firebasedatabase.app/';
+ url2 =this.url +'familles.json';
+  // url: string ='https://personne29200-default-rtdb.europe-west1.firebasedatabase.app/';
+  // url2 = this.url + 'personne.json';
+  public produitForm! : FormGroup;
 //------------------------------------------------------------------------
-  constructor(private db: AngularFireDatabase) {
-    this.familyRef = this.db.list('family');
+  constructor(private httpClient: HttpClient, private fb : FormBuilder) {
+
   }
 //------------------------------------------------------------------------
   ngOnInit(): void {
-    this.familyRef.snapshotChanges().subscribe((changes: any[]) => {
-      this.dataSource = new MatTableDataSource(this.getFamilies(changes));
-      this.length = this.dataSource.data.length;
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
+
+
+      this.httpClient.get<any>(this.url2).subscribe((response) => {
+        console.log(response);
+        console.log("Day that never come");
+        if (response != undefined) {
+          this.tableau=response;
+          // for (let attribut in response) {
+          //   let p: any = response[attribut];
+          //   // p.prenom = p['prenom']
+          //   p.id = attribut;
+          //   this.tableau.push(p.id);
+          //   console.log(p)
+          // }
+        }
+        console.log(this.tableau.length);
+      });
+
+      this.produitForm = this.fb.group({
+        nomProduit : this.fb.control(''),
+        prix : this.fb.control('')
+      });
   }
-//------------------------------------------------------------------------
-  private getFamilies(changes: any[]): Family[] {
-    const families: Family[] = [];
-    changes.forEach(change => {
-      const key = change.key;
-      const data = change.payload.val();
-      families.push({ id: data.id, nom: data.nom });
-    });
-    return families;
+
+  ajoutProduit(){
+    let nomProduit = this.produitForm.value.nomProduit;
+    let prix = this.produitForm.value.prix;
+    alert(nomProduit +" avec le prix "+prix +"  euros est ajouté");
   }
-//------------------------------------------------------------------------
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+
+
 }
-//------------------------------------------------------------------------
-interface Family {
-  id: string;
-  nom: string;
-}
+//------------------------------------------------------------------------$
+
+
 
 
 

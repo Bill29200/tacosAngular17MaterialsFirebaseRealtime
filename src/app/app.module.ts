@@ -22,9 +22,12 @@ import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ServerComponent } from './components/server/server.component';
@@ -66,6 +69,11 @@ import { AuthorizationGard } from './guards/authorization.guard';
     MatInputModule,
     MatSortModule,
     MatTableModule,
+    MatGridListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    MatListModule,
 
     RouterLink,
     RouterLinkActive,
@@ -74,8 +82,7 @@ import { AuthorizationGard } from './guards/authorization.guard';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    MatTableModule,
-    MatPaginatorModule
+
 
   ],
   providers: [

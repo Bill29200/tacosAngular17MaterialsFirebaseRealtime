@@ -1,42 +1,87 @@
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>Administration</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<h1 class="ml-3 mt-3 text-center">Familles des produits
 
-    <div class="container">
-      <h2>Liste des Familles</h2>
+  <span class="badge bg-danger">{{tableau.length}}
+  </span>
+</h1>
 
-      <mat-form-field>
-        <mat-label>
-          Search <mat-icon>search</mat-icon>
-        </mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. format" #input>
-      </mat-form-field>
-<!-- ------------------------------- -->
-      <mat-table [dataSource]="dataSource" matSort>
+<mat-tab-group animationDuration="2000ms">
+  @for (famille of tableau; track famille) {
+  <mat-tab label={{famille.nomFamille}}>
 
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-        </ng-container>
+    <div class="card-container">
+      <div class="row">
+        <h3 class=" text-center"> {{famille.nomFamille}} <span class="badge bg-danger">{{famille.elements.length}}
+          </span></h3>
 
-        <ng-container matColumnDef="nom">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.nom}} </mat-cell>
-        </ng-container>
+        @for (produit of famille.elements; track produit) {
+        <div class="col-sm-12 col-md-6 col-lg-3">
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-      </mat-table>
-<!-- ------------------------------- -->
-      <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
-      </mat-paginator>
-    </div>
+          <div class="card   mt-3 mb-3 ml-3 mr-3">
+            <h3 class="card-header  text-center text-danger ">
+              {{produit.nomProduit}}
+            </h3>
+
+            <div class="card-body">
+              <p class="card-text">
+                <img mat-card-md-image style="width: 150px; height: 100px;" src="assets/{{produit.nomProduit}}.jpeg"
+                  class="rounded-circle" alt="{{produit.nomProduit}}">
+              </p>
+              <h5>{{produit.prix}} €</h5>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-outline-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                  <path
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                </svg>
+
+              </button>
+              &nbsp;
+              <button class="btn btn-outline-primary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+        <!-- ///////////////////////// -->
+        <div class="col-sm-12 col-md-6 col-lg-3">
+
+          <div class="card   mt-3 mb-3 ml-3 mr-3 produit-form"  [formGroup]="produitForm"></div>
+            <h3 class="card-header  text-center text-danger ">
+              Ajouter produit
+            </h3>
+
+            <div class="card-body">
+              <div class="card-body">
+                  <input type="text" class="form-control" id="nomProduit" placeholder="Nom produit">
+                  <input type="text" class="form-control" id="prix" placeholder="Prix en €">
+
+              </div>
+            </div>
+
+            <div class="card-footer text-center">
+              <button class="btn btn-success btn-sm" (click)="ajoutProduit()">
+                <mat-icon>add</mat-icon>
+
+              </button>
+
+            </div>
+          </div>
+        </div>
+        <!-- //////////////////////// -->
+      </div>
 
 
-  </mat-card-content>
-  <mat-card-actions>
+  </mat-tab>
+  }
+  <mat-tab>
 
-  </mat-card-actions>
-</mat-card>
+
+  </mat-tab>
+</mat-tab-group>
