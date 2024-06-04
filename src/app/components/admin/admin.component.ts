@@ -38,7 +38,7 @@ throw new Error('Method not implemented.');
 
 
       this.httpClient.get<any>(this.url2).subscribe((response) => {
-        console.log(response);
+        console.table(response);
         console.log("Day that never come");
         if (response != undefined) {
           this.tableau=response;

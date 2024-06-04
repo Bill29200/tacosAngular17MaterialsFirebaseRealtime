@@ -1,28 +1,60 @@
-<mat-toolbar class="title">
-  <span></span>
-  <span class="align-center">TACOS
-     <img mat-card-sm-image alt="TACOS" src="assets/tacos.png" />
-  </span>
-  <span></span>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- ......................................................................................................... -->
+      <nav class="navbar text-danger" aria-label="title">
+        <span style="flex:auto"></span>
+        <span>TACOS
+          <img class="rounded-circle" mat-card-sm-image alt="TACOS" src="assets/tacos.png" />
+        </span>
+        <span class="align-center">it </span>
+        <span style="flex:auto"></span>
+      </nav>
+      <!-- ......................................................................................................... -->
+      <nav class="navbar navbar-expand-lg  bg-arriereplan" aria-label="menubar">
+        <div class="container-fluid">
+          <!-- .................................................................................................... -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon text-danger"><mat-icon> fastfood</mat-icon></span>
+          </button>
+          <!-- .................................................................................................... -->
+          <span style="flex:auto"></span>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
 
-</mat-toolbar>
-<br>
-<mat-toolbar class="barMenu">
-  <button mat-icon-button>
-    <mat-icon> fastfood</mat-icon>
-  </button>
-  <span style="flex:auto"></span>
-  <button mat-button routerLink="/menu/home" routerLinkActive="active">Home</button>
-  <button *ngIf="authService.roles.includes('ADMIN')" mat-button routerLink="/menu/admin" routerLinkActive="active">Admin</button>
-  <button *ngIf="authService.roles.includes('SERVER')" mat-button routerLink="/menu/server" routerLinkActive="active">Server</button>
-  <button *ngIf="authService.roles.includes('CLIENT')" mat-button routerLink="/menu/client" routerLinkActive="active">Client</button>
-  <button mat-button routerLink="/menu/about" routerLinkActive="active">About</button>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/menu/home" routerLinkActive="active">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" *ngIf="authService.roles.includes('ADMIN')" routerLink="/menu/admin"
+                  routerLinkActive="active">Admin </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" *ngIf="authService.roles.includes('SERVER')" routerLink="/menu/server"
+                  routerLinkActive="active">Server</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" *ngIf="authService.roles.includes('CLIENT')" routerLink="/menu/client"
+                  routerLinkActive="active">Client </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/menu/about" routerLinkActive="active">About </a>
+              </li>
+            </ul>
+            <span style="flex:auto"></span>
+            <form class="d-flex">
+              <div class="btn text-danger" *ngIf="authService.isAuthenticated">
+                <mat-icon>person_outline</mat-icon> {{authService.username}}
+              </div>
+              <button class="btn btn-danger" (click)="logout()">Logout</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <!-- ......................................................................................................... -->
+    </div>
+  </div>
+</div>
 
-  <mat-icon class="espace">person_outline</mat-icon>
-  <button mat-button *ngIf = "authService.isAuthenticated" color="accent">
-    {{authService.username}}
-  </button>
-  <button mat-raised-button color ="accent" (click)="logout()">Logout</button>
-
-</mat-toolbar>
 <router-outlet></router-outlet>

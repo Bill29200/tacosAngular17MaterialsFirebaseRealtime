@@ -1,32 +1,33 @@
-.align-center {
-  flex: 1; /* Cela fait en sorte que le texte occupe l'espace disponible */
-  text-align: center; /* Aligne le texte au centre horizontalement */
+// .align-center {
+//   flex: 1; /* Cela fait en sorte que le texte occupe l'espace disponible */
+//   text-align: center; /* Aligne le texte au centre horizontalement */
 
-  display: flex;
-  justify-content: center; /* Alignement horizontal au centre */
-  align-items: center; /* Alignement vertical au centre */
-  height: 100%; /* Assure que la div remplit toute la hauteur de la barre d'outils */
+//   display: flex;
+//   justify-content: center; /* Alignement horizontal au centre */
+//   align-items: center; /* Alignement vertical au centre */
+//   height: 100%; /* Assure que la div remplit toute la hauteur de la barre d'outils */
 
-  color: rgb(238, 103, 6);
-}
-mat-icon{
-  color: rgb(238, 103, 6);
-}
+//   color: rgb(238, 103, 6);
+// }
+// mat-icon{
+//   color: rgb(238, 103, 6);
+// }
 
 img {
-
   height: 100px ;
   width:100px;
+}
+// .barMenu{
+//   background-color: rgb(9, 159, 9);
+//   color: antiquewhite;
+// }
+// button{
+//   color: rgb(238, 103, 6);
+// }
+// .espace {
+//   margin-left: 50px;
+// }
 
+.bg-arriereplan{
+  background-color: #a2a0a0;
 }
-.barMenu{
-  background-color: rgb(9, 159, 9);
-  color: antiquewhite;
-}
-button{
-  color: rgb(238, 103, 6);
-}
-.espace {
-  margin-left: 50px;
-}
-
