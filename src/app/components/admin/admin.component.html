@@ -1,11 +1,11 @@
 <h1 class="ml-3 mt-3 text-center">Familles des produits
 
-  <span class="badge bg-danger">{{tableau.length}}
+  <span class="badge bg-danger">{{data.tableau.length}}
   </span>
 </h1>
 
 <mat-tab-group animationDuration="2000ms">
-  @for (famille of tableau; track famille) {
+  @for (famille of data.tableau; track famille) {
   <mat-tab label={{famille.nomFamille}}>
 
     <div class="card-container">
@@ -52,36 +52,41 @@
         <!-- ///////////////////////// -->
         <div class="col-sm-12 col-md-6 col-lg-3">
 
-          <div class="card   mt-3 mb-3 ml-3 mr-3 produit-form"  [formGroup]="produitForm"></div>
-            <h3 class="card-header  text-center text-danger ">
-              Ajouter produit
-            </h3>
+          <div class="card   mt-3 mb-3 ml-3 mr-3 produit-form" [formGroup]="produitForm"></div>
+          <h3 class="card-header  text-center text-danger ">
+            Ajouter produit
+          </h3>
 
+          <div class="card-body">
             <div class="card-body">
-              <div class="card-body">
-                  <input type="text" class="form-control" id="nomProduit" placeholder="Nom produit">
-                  <input type="text" class="form-control" id="prix" placeholder="Prix en €">
-
-              </div>
-            </div>
-
-            <div class="card-footer text-center">
-              <button class="btn btn-success btn-sm" (click)="ajoutProduit()">
-                <mat-icon>add</mat-icon>
-
-              </button>
+              <input type="text" class="form-control" id="nomProduit" placeholder="Nom produit">
+              <input type="text" class="form-control" id="prix" placeholder="Prix en €">
 
             </div>
           </div>
+
+          <div class="card-footer text-center">
+            <button class="btn btn-success btn-sm" (click)="ajoutProduit()">
+              <mat-icon>add</mat-icon>
+
+            </button>
+
+          </div>
         </div>
-        <!-- //////////////////////// -->
       </div>
+      <!-- //////////////////////// -->
+    </div>
 
 
   </mat-tab>
   }
-  <mat-tab>
-
-
+  <mat-tab label="+">
+    <div class="card-container">
+      <div class="row">
+        <div class="col-md-12 text-center mt-3">
+          <button class="btn btn-outline-success ">Nouvelle famille </button>
+        </div>
+      </div>
+    </div>
   </mat-tab>
 </mat-tab-group>
