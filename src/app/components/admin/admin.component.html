@@ -1,19 +1,27 @@
+<app-card-upload></app-card-upload>
 <h1 class="ml-3 mt-3 text-center">Familles des produits
 
-  <span class="badge bg-danger">{{data.tableau.length}}
+  <span class="badge bg-info">{{data.familles.length}}
   </span>
 </h1>
 
 <mat-tab-group animationDuration="2000ms">
-  @for (famille of data.tableau; track famille) {
-  <mat-tab label={{famille.nomFamille}}>
+  @for (famille of data.familles; track famille) {
+  <mat-tab class="mt-3 mb-3" label={{famille.nomFamille}}>
 
     <div class="card-container">
       <div class="row">
-        <h3 class=" text-center"> {{famille.nomFamille}} <span class="badge bg-danger">{{famille.elements.length}}
-          </span></h3>
+        <div>
+          <br>
+          <h3 class=" text-center"> {{famille.nomFamille}} &nbsp; <span class="badge bg-info">{{famille.produits.length}} </span>
+            &nbsp;
+            <button class="btn btn-outline-danger" (click)="selectFamilly(famille.nomFamille)" data-bs-toggle="modal" data-bs-target="#deleteFamilleModal"><i class="fa-solid fa-trash"></i></button>
+          </h3>
 
-        @for (produit of famille.elements; track produit) {
+        </div>
+
+
+        @for (produit of famille.produits; track produit) {
         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
 
           <div class="card   mt-3 mb-3 ml-3 mr-3">
@@ -23,56 +31,51 @@
 
             <div class="card-body">
               <p class="card-text">
-                <img mat-card-md-image style="width: 150px; height: 100px;" src="assets/{{produit.nomProduit}}.jpeg"
+                <!-- <img mat-card-md-image style="width: 150px; height: 100px;" src="assets/{{produit.nomProduit}}.jpeg"
+                  class="rounded card-img-top img-fluid" alt="{{produit.nomProduit}}"> -->
+
+                  <img [src]="'assets/'+'{{produit.nomProduit}}'+'.jpeg'||'assets/default.jpeg'"  mat-card-md-image style="width: 150px; height: 100px;"
                   class="rounded card-img-top img-fluid" alt="{{produit.nomProduit}}">
               </p>
               <h3>{{produit.prix}} €</h3>
             </div>
             <div class="card-footer text-center">
-              <button class="btn btn-outline-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                  <path
-                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                  <path
-                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                </svg>
-
+              <button class="btn btn-outline-danger btn-sm" (click)="selectProduit(famille.nomFamille,produit.nomProduit)"data-bs-toggle="modal" data-bs-target="#deleteProduitModal"><i class="fa-solid fa-trash"></i>
               </button>
               &nbsp;
-              <button class="btn btn-outline-primary btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                  height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                  <path
-                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-                </svg>
+              <button class="btn btn-outline-primary btn-sm" (click)="loadProduit(famille.nomFamille,produit.nomProduit,produit.prix)" data-bs-toggle="modal" data-bs-target="#updateProduitModal">
+                <i class="fa-solid fa-pen"></i>
               </button>
             </div>
           </div>
         </div>
         }
         <!-- ///////////////////////// -->
-        <div class="col-sm-12 col-md-6 col-lg-3">
 
-          <div class="card   mt-3 mb-3 ml-3 mr-3 produit-form" [formGroup]="produitForm"></div>
-          <h3 class="card-header  text-center text-danger ">
-            Ajouter produit
-          </h3>
-
-          <div class="card-body">
-            <div class="card-body">
-              <input type="text" class="form-control" id="nomProduit" placeholder="Nom produit">
-              <input type="text" class="form-control" id="prix" placeholder="Prix en €">
-
+        <div class="container">
+          <div class="row  align-top">
+            <div class="col-12 text-center">
+              <button class="btn btn-outline-success " (click)="loadProduit(famille.nomFamille,'',0 )"
+              data-bs-toggle="modal" data-bs-target="#newProduitModal">
+                <i class="fa-solid fa-plus"></i> </button>
             </div>
           </div>
-
-          <div class="card-footer text-center">
-            <button class="btn btn-success btn-sm" (click)="ajoutProduit()">
-              <mat-icon>add</mat-icon>
-
-            </button>
-
-          </div>
         </div>
+          <!-- <h3 class="card-header  text-center text-danger ">
+            Nouveau produit
+          </h3>
+          <div class="card-body">
+            <input type="text" aria-label="nomProduit" [(ngModel)]="nomProduit" placeholder="Nom produit" class="form-control ">
+            <input type="text" aria-label="prix" [(ngModel)]="prix" placeholder="Prix" class="form-control "> &nbsp; euro
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-outline-success " (click)="addProduit(famille.nomFamille, nomProduit, prix)"><i class="fa-solid fa-plus"></i></button>
+
+          </div> -->
+
+
+
+
       </div>
       <!-- //////////////////////// -->
     </div>
@@ -80,13 +83,118 @@
 
   </mat-tab>
   }
-  <mat-tab label="+">
-    <div class="card-container">
-      <div class="row">
-        <div class="col-md-12 text-center mt-3">
-          <button class="btn btn-outline-success ">Nouvelle famille </button>
-        </div>
-      </div>
-    </div>
+  <mat-tab>
+    <ng-template mat-tab-label>
+
+        <button class="btn btn-success opacity-75" (click)="loadFamille('')"
+        data-bs-toggle="modal" data-bs-target="#newFamilleModal">
+          <i class="fa-sharp fa-solid fa-plus"></i></button>
+    </ng-template>
+    <!-- <div class="container col-sm-12 col-md-12 col-lg-3 mt-3 mb-m">
+      <h3 class="mt-3 mb-3">Ajouter <i class="fa fa-stumbleupon-circle" aria-hidden="true"></i></h3>
+      <input type="text" aria-label="nomFamille" [(ngModel)]="nomFamille" placeholder="Nom famille" class="form-control ">
+      <br>
+      <button class="btn btn-outline-success "(click)="loadFamille('')"
+      data-bs-toggle="modal" data-bs-target="#newFammilleModal"><i class="fa-solid fa-plus"></i></button>
+    </div> -->
   </mat-tab>
 </mat-tab-group>
+
+<!-- DeleteFamilleModal -->
+<div class="modal fade" id="deleteFamilleModal" tabindex="-1" aria-labelledby="deleteFamilleModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteFamilleModal">Supprimer famille</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       Vous voulez vraiment supprimer la famille {{nomFamille}}
+      </div>
+      <div class="modal-footer">
+        <button  (click)="deleteFamille()" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-trash"></i></button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DeleteProduitModal -->
+<div class="modal fade" id="deleteProduitModal" tabindex="-1" aria-labelledby="deleteProduitModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteProduitModal">Supprimer produit</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       Vous voulez vraiment supprimer le produit {{nomProduit}}
+      </div>
+      <div class="modal-footer">
+        <button  (click)="deleteProduit()" class="btn btn-outline-danger" data-bs-dismiss="modal"><i class="fa-solid fa-trash"></i></button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UpdateProduitModal -->
+<div class="modal fade" id="updateProduitModal" tabindex="-1" aria-labelledby="updateProduitModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="updateProduitModal">Modifier produit</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" aria-label="nomProduit" [(ngModel)]="nomProduit" placeholder="Nom produit" class="form-control ">
+        <input type="text" aria-label="prix" [(ngModel)]="prix" placeholder="Prix" class="form-control "> &nbsp; euro
+      </div>
+      <div class="modal-footer">
+        <button  (click)="updateProduit()" class="btn btn-outline-success" data-bs-dismiss="modal"> <i class="fa-solid fa-pen"></i></button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NewProduitModal -->
+<div class="modal fade" id="newProduitModal" tabindex="-1" aria-labelledby="newProduitModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newProduitModal">Nouveau produit</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" aria-label="nomProduit" [(ngModel)]="nomProduit" placeholder="Nom produit" class="form-control ">
+        <input type="text" aria-label="prix" [(ngModel)]="prix" placeholder="Prix" class="form-control "> &nbsp; euro
+      </div>
+      <div class="modal-footer">
+        <button  (click)="addProduit(nomFamille,nomProduit,prix)" class="btn btn-outline-success" data-bs-dismiss="modal"> <i class="fa-solid fa-pen"></i></button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NewFamilleModal -->
+<div class="modal fade" id="newFamilleModal" tabindex="-1" aria-labelledby="newFamilleModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newFamilleModal">Ajouter famille produit </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" aria-label="nomFamille" [(ngModel)]="nomFamille" placeholder="Nom famille" class="form-control ">
+      </div>
+      <div class="modal-footer">
+        <button  (click)="addFamille(nomFamille)" class="btn btn-outline-success" data-bs-dismiss="modal"> <i class="fa-solid fa-pen"></i></button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

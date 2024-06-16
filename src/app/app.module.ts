@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,6 +34,9 @@ import { ServerComponent } from './components/server/server.component';
 import { environment } from './environments/environment';
 import { AuthGard } from './guards/auth.guard';
 import { AuthorizationGard } from './guards/authorization.guard';
+import { CardUploadComponent } from './components/card-upload/card-upload.component';
+
+
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyCOsJnTLe88Au9pdjphttShAvfUZJZMp4k",
@@ -54,7 +57,8 @@ import { AuthorizationGard } from './guards/authorization.guard';
     HomeComponent,
     MenuComponent,
     AboutComponent,
-    LoginComponent
+    LoginComponent,
+    CardUploadComponent
 
   ],
   imports: [
@@ -83,6 +87,7 @@ import { AuthorizationGard } from './guards/authorization.guard';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    FormsModule
 
 
   ],

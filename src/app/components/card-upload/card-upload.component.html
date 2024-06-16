@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-md-4">
+          <div class="card">
+              <img [src]="imageSrc || 'assets/default.jpeg'" class="card-img-top" alt="Image de la carte">
+              <div class="card-body">
+                 <label for="imageUpload"></label>
+                  <input type="file" class="form-control-file" (change)="onFileSelected($event)" accept="image/*">
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
