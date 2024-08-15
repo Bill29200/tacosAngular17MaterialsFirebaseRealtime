@@ -1,0 +1,27 @@
+<!-- src/app/produit-form/produit-form.component.html -->
+
+
+
+
+<div class="container">
+  <form [formGroup]="produitForm" (ngSubmit)="onSubmit()">
+    <div>
+      <input class="form-control" id="nomProduit" formControlName="nomProduit" placeholder="Nom du Produit">
+    </div>
+    <div>
+
+      <img [src]="imageSrc || 'assets/default.jpeg'" class="card-img-top" alt="Image de la carte">
+      <input type="file" class="form-control-file" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+    <div class="input-group">
+      <input class="form-control" id="prix" formControlName="prix" type="number" placeholder="Prix"> &nbsp; €
+    </div>
+    <div>
+      <input class="form-control" id="url" formControlName="url">
+    </div>
+    <div class="text-end">
+      <button class="btn btn-success" type="submit" (click)="ajouterProduit()">Ajouter</button>
+    </div>
+
+  </form>
+</div>

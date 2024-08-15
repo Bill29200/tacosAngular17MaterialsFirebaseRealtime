@@ -28,25 +28,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { CardUploadComponent } from './components/card-upload/card-upload.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ServerComponent } from './components/server/server.component';
 import { environment } from './environments/environment';
 import { AuthGard } from './guards/auth.guard';
 import { AuthorizationGard } from './guards/authorization.guard';
-import { CardUploadComponent } from './components/card-upload/card-upload.component';
 
-
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCOsJnTLe88Au9pdjphttShAvfUZJZMp4k",
-//   authDomain: "tacosit-0.firebaseapp.com",
-//   databaseURL: "https://tacosit-0-default-rtdb.europe-west1.firebasedatabase.app",
-//   projectId: "tacosit-0",
-//   storageBucket: "tacosit-0.appspot.com",
-//   messagingSenderId: "89253593023",
-//   appId: "1:89253593023:web:bd3de80da39e4295f02b0a"
-// };
 
 @NgModule({
   declarations: [
@@ -58,7 +48,8 @@ import { CardUploadComponent } from './components/card-upload/card-upload.compon
     MenuComponent,
     AboutComponent,
     LoginComponent,
-    CardUploadComponent
+    CardUploadComponent,
+    ProductFormComponent
 
   ],
   imports: [
@@ -87,7 +78,8 @@ import { CardUploadComponent } from './components/card-upload/card-upload.compon
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
 
 
   ],

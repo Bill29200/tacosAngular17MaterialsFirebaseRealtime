@@ -1,0 +1,8 @@
+<div *ngFor="let produit of produits">
+  <h3>{{ produit.nomProduit }}</h3>
+  <p>Prix: {{ produit.prix }}€</p>
+  <img *ngIf="produit.urlImage" [src]="produit.urlImage" alt="{{ produit.nomProduit }}" width="100">
+  <input type="file" (change)="onFileSelected($event, produit)">
+
+  <br><br><br><br><br><br><br>
+</div>

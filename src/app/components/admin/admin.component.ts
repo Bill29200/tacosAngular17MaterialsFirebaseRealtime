@@ -1,7 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
-import { v4 as uuidv4 } from 'uuid';
 import { DataService } from '../../services/data.service';
+
+
 //------------------------------------------------------------------------
 @Component({
   selector: 'app-admin',
@@ -62,17 +63,19 @@ deleteProduit() {
 //------------------------------------------------------------------------
   ngOnInit(): void {
 
-    this.nomFamille="";
 
-    const id: string = uuidv4();
-    console.log(id);
+
         }
 
 //-----------------------------------------
 addFamille(nomFamille:string) {
-  this.data.addFamille(nomFamille);
-  //this.data.getAll();
-  this.nomFamille="";
+
+  if (nomFamille!="")
+    {
+       this.data.addFamille(nomFamille);
+       this.nomFamille="";
+    }
+
   }
 //------------------------------------------
   loadProduit(nomFamille: string,nomProduit: string,prix: number) {
@@ -94,6 +97,7 @@ addFamille(nomFamille:string) {
 loadFamille(nomFamille:string) {
   this.nomFamille= nomFamille;
   }
+//......................................................
 
 }
 //------------------------------------------------------------------------

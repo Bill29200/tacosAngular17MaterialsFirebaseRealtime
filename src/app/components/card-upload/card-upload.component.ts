@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class CardUploadComponent {
   imageSrc!: string ;//| ArrayBuffer | null = null;
 
+  fileName! : string;
+
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
@@ -16,6 +18,7 @@ export class CardUploadComponent {
         this.imageSrc = e.target?.result+"";
 
         e.target?.result;
+        this.fileName= file.name;
       };
       reader.readAsDataURL(file);
     }
